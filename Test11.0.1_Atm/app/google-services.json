@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1015339884251",
+    "firebase_url": "https://atm-test-0203-default-rtdb.firebaseio.com",
+    "project_id": "atm-test-0203",
+    "storage_bucket": "atm-test-0203.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1015339884251:android:7a4c6239ca3a05783e76fe",
+        "android_client_info": {
+          "package_name": "elico.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1015339884251-1ijjg1etav3h24bsv6k8ibpliat7hkj9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoE1lfFEuf-XBKaC9A99gc-s0kYcWPpVU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1015339884251-1ijjg1etav3h24bsv6k8ibpliat7hkj9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
