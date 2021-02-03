@@ -1,6 +1,8 @@
 package elico.com;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -9,6 +11,8 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
 
@@ -19,17 +23,29 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean logined = false;
     private int REQUEST_LOGIN = 100;
+    String[] functions = null;
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //a1.Recycler
+        RecyclerView recycler = findViewById(R.id.recycleView_Recycler);
+        //系統內設置是否固定大小
+        recycler.setHasFixedSize(true);
+        //系統內設置排列方式使用預設
+        recycler.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+        //a2.Adapter
+        FunctionAdapter adapter = new FunctionAdapter(MainActivity.this);
+        recycler.setAdapter(adapter);
+
         if (!logined) {
             Intent intent = new Intent(MainActivity.this, Login.class);
             startActivityForResult(intent,REQUEST_LOGIN);
         }
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -18,33 +18,33 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.logging.Level;
-
+/*
+可以連動Firebase進行登入，想要用新的帳號需要再學習firebase遠端新增檔案的code
+當選中記住密碼，會返回最後一個執行login程式的帳號密碼到本地端(手機端)
+下次再開啟軟體時，會記住密碼和勾選項狀態
+ */
 public class Login extends AppCompatActivity {
 
     private static final String TAG = Login.class.getSimpleName();
     //1.
     private EditText editText_account;
     private EditText editText_password;
+    private CheckBox checkBox_PWRemember;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        initialize();
+    }
+    //設置預設值、獲取物件
+    private void initialize() {
         //2.
         editText_account = findViewById(R.id.editTextText_AccountNumber);
         editText_password = findViewById(R.id.editText_Password);
-/*        //test 建立一個名叫atm.xml的資料庫
-        getSharedPreferences("atm",MODE_PRIVATE)
-                .edit()
-                .putInt("LEVEL",3)
-                .putString("NAME","ELico")
-                .commit();
-        int level = getSharedPreferences("atm",MODE_PRIVATE)
-                .getInt("LEVEL",0);
-        Log.d(TAG, "onCreate: " + level);//end test*/
-        //9.
-        CheckBox checkBox_PWRemember = findViewById(R.id.checkBox_PasswordRemembering);
-        //12.
+        checkBox_PWRemember = findViewById(R.id.checkBox_PasswordRemembering);
+        //9.當勾選時，本地設定記住最後一次輸入的帳號密碼
+        //12.設定bool預設值為本地值或false
         checkBox_PWRemember.setChecked(getSharedPreferences("atm",MODE_PRIVATE)
                 .getBoolean("REMEMBER_PASSWORD",false));
         checkBox_PWRemember.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -58,7 +58,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        //8.如果本地(手機應用程式儲存空間)資料庫內已經有登入資料，則取得該user id,user password
+        //8.如果本地(手機應用程式儲存空間)資料庫內已經有登入資料，則取得該user id, user password並設定其預設值
         String already_login_id = getSharedPreferences("atm",MODE_PRIVATE)
                 .getString("USER_ID","");
         String already_login_password = getSharedPreferences("atm",MODE_PRIVATE)
@@ -66,11 +66,12 @@ public class Login extends AppCompatActivity {
         editText_account.setText(already_login_id);
         editText_password.setText(already_login_password);
     }
+
     //按下button時執行一次
     public void login(View view){
         //3.
-        String input_id = editText_account.getText().toString();
-        String input_password = editText_password.getText().toString();
+        final String input_id = editText_account.getText().toString();
+        final String input_password = editText_password.getText().toString();
         //5.
         FirebaseDatabase
                 .getInstance()
