@@ -20,16 +20,32 @@ public class FunctionAdapter extends RecyclerView.Adapter<FunctionAdapter.Functi
         functions = context.getResources().getStringArray(R.array.functions);
     }
 
+    public static class FunctionViewHolder extends RecyclerView.ViewHolder{
+        TextView setTextView;
+        public FunctionViewHolder(@NonNull View itemView) {
+            super(itemView);
+            setTextView = itemView.findViewById(android.R.id.text1);
+        }
+    }
+
+    //    ======
+    //    必須實作
+    //    ======
+    // 導入本地layout.xml檔案為Recycler的其中一格物件holder   (-> Recycler.holder => layout.xml)
     @NonNull
     @Override
     public FunctionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // get from context -> simple_list_item_1
-        // set simple_list_item_1 -> context.xml.root(parent)
-        // get context -> text1
+        /*
+            1.
+            get from context -> simple_list_item_1
+            set simple_list_item_1 -> context.xml.root(parent)
+            get context -> text1
+            2.
+            尋找本地資料庫，所以android.R開頭
+         */
         View view = LayoutInflater.from(context).inflate(
                 android.R.layout.simple_list_item_1,
-                parent,
-                false);
+                parent, false);
         return new FunctionViewHolder(view);
     }
 
@@ -44,11 +60,5 @@ public class FunctionAdapter extends RecyclerView.Adapter<FunctionAdapter.Functi
     }
 
 
-    public static class FunctionViewHolder extends RecyclerView.ViewHolder{
-        TextView setTextView;
-        public FunctionViewHolder(@NonNull View itemView) {
-            super(itemView);
-            setTextView = itemView.findViewById(android.R.id.text1);
-        }
-    }
+
 }
